@@ -1,14 +1,12 @@
-from flask import Flask, render_template
+# app/__init__.py
 
-app = Flask(__name__)
+from flask import Flask
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+# Initialize the app
+app = Flask(__name__, instance_relative_config=True)
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
+# Load the views
+from app import views
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# Load the config file
+app.config.from_object('config')
